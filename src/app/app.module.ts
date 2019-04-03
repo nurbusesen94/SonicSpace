@@ -30,12 +30,7 @@ import {WelcomePage} from "../pages/welcome/welcome";
 import { FcmProvider } from '../providers/fcm/fcm';
 
 const FirebaseAuth = {
-  apiKey: "AIzaSyAkeWzYnCbTmacuA3RWzI9kE8Y5ePM9_co",
-  authDomain: "myapp-7a226.firebaseapp.com",
-  databaseURL: "https://myapp-7a226.firebaseio.com",
-  projectId: "myapp-7a226",
-  storageBucket: "myapp-7a226.appspot.com",
-  messagingSenderId: "832964868329"
+  //Your Firebase apiKey
 };
 
 @NgModule({
