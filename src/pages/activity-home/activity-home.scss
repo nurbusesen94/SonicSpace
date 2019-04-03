@@ -1,0 +1,100 @@
+page-activity-home {
+  font-family: Arial,sans-serif;
+  color: #292f33;
+}
+.tweetEntry-tweetHolder {
+  border-top: 1px solid #e1e8ed;
+  width: 388px;
+  margin: auto;
+  border-radius: 5px;
+
+}
+.roundProfile{
+  background-position: center;
+  background-size: cover;
+  height: 48px;
+  width: 48px;
+  margin-top: 10px;
+  margin-left: -53px;
+  float: left;
+  border-radius: 50%;
+}
+.tweetEntry-action-list {
+  display: block;
+  line-height: 18px;
+  margin-left: 58px;
+  margin-top: -1px;
+  color: #292f33;
+}
+.fa-reply:hover {
+  color: #292f33;
+}
+.fa-retweet:hover {
+  color: #5cd65c;
+}
+.fa-heart:hover {
+  color: #ff3333;
+}
+
+.tweetEntry {
+  border-bottom: 1px solid #e1e8ed;
+  cursor: pointer;
+  min-height: 51px;
+  padding: 9px 12px;
+}
+.tweetEntry-content {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  margin-left: 58px;
+  font-size: 14px;
+}
+.tweetEntry-account-group {
+  color: #8899a6;
+  padding: 0px;
+  text-decoration: none;
+  line-height: 20px;
+}
+.tweetEntry-avatar {
+  float: left;
+
+  height: 48px;
+  width: 48px;
+  margin-top: 8px;
+  margin-left: -53px;
+  border-radius: 50px;
+
+
+}
+.tweetEntry-fullname {
+  font-weight: bold;
+  font-size: 14px;
+  color: #292f33;
+  padding: 0px;
+}
+.tweetEntry-username {
+  font-weight: bold;
+  font-size: 14px;
+  color: #b1bbc3;
+  padding: 0px;
+}
+.tweetEntry-timestamp {
+  font-size: 14px;
+  color: #b1bbc3;
+  padding: 0px;
+}
+.tweetEntry-text-container {
+}
+
+.optionalMedia {
+  margin-left: 58px;
+  margin-top: 10px;
+}
+.optionalMedia-img {
+  border-radius: 5px;
+  max-width: 506px;
+  max-height: 506px;
+
+}
+
+

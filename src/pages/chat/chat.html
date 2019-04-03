@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar >
+    <ion-title *ngIf="receiverUsername"> {{ receiverUsername }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-lines class="chat-page" padding>
+
+
+  <ion-list no-lines  *ngFor="let message of messagesList">
+
+    <ion-item-sliding>
+
+    <ion-item  text-wrap="" *ngIf="receiverUsername == message.sendername">
+      <ion-avatar item-left="">
+        <div class="roundProfile2" alt="" [style.backgroundImage]="'url('+photoURL+')'"></div>
+      </ion-avatar>
+      <h2 class="box2"> {{message.message}}</h2>
+      <p style="padding: 8px;margin-bottom: -3.5%">{{message.timestamp | date: 'HH:mm'}}</p>
+    </ion-item>
+
+
+    <ion-item  text-wrap class="chat_message" *ngIf="senderUsername == message.sendername">
+      <h2  class="box1"> {{message.message}}</h2>
+      <p style="padding: 8px;margin-bottom: -2.5%">{{message.timestamp | date: 'HH:mm'}}</p>
+    </ion-item>
+
+      <ion-item-options side="right">
+        <button (click)="deleteMessage(message.message)" ion-button color="danger" outline>
+          <ion-icon  style="zoom:1.75 " name="trash">
+          </ion-icon>
+        </button>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-list>
+    <ion-item style="border: #bfbfbf" >
+
+      <ion-input style="width: 80%"  type="text" [(ngModel)]="message"></ion-input>
+      <button item-end icon-only clear ion-button (click)="sendMessage(message)" item-right><ion-icon name="md-send"></ion-icon></button>
+    </ion-item>
+  </ion-list>
+</ion-footer>

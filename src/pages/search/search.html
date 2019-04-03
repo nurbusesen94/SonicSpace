@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-searchbar
+      placeholder="Search"
+      (ionInput)="filterItems($event)">
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list *ngFor="let user of avatarList;index as i;" no-lines>
+    <ion-item (click)="goToProfile(user)">
+      <ion-avatar item-left="">
+
+        <img src="{{(user)?.profilePicURL}}" alt="">
+      </ion-avatar>
+      {{ (user)?.username }}
+
+    </ion-item>
+  </ion-list>
+
+</ion-content>

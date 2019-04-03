@@ -1,0 +1,75 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Home
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goMessage()">
+        <ion-icon style="zoom: 1.4" color="dark" name="ios-send-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content ></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="tweetEntry-tweetHolder" *ngFor="let post of postList;index as i;">
+
+
+      <div class="tweetEntry-content" >
+
+        <a class="tweetEntry-account-group">
+
+          <div (click)="goToProfile(post.uid)" class="roundProfile" *ngIf="post.profilePicURL != null"  [style.backgroundImage]="'url('+(post)?.profilePicURL+')'"></div>
+
+
+          <strong class="tweetEntry-fullname">
+            {{ (post)?.firstname }}&nbsp;{{ (post)?.lastname }}
+          </strong>
+
+          <span class="tweetEntry-username">
+        @<b>{{ (post)?.username }}</b>
+      </span>
+
+          <span class="tweetEntry-timestamp">{{ post.timestamp | date: 'HH:mm'}}</span>
+
+        </a>
+
+        <div class="tweetEntry-text-container">
+          <audio controls src={{post.audioFileURL}}></audio>
+
+        </div>
+
+      </div>
+
+      <div class="tweetEntry-action-list">
+
+        <button  ion-button color="danger" clear (click)="likePost(post)"  icon-only>
+          <ion-icon  style="zoom: 1"  name="ios-heart-outline">  </ion-icon>
+          <p *ngIf="post.likes_count"> {{post.likes_count}}</p>
+        </button>
+        <button style="background-color: transparent;" *ngIf="post.uid == uid" ion-button color="whites" clear (click)="deletePost(post)"  icon-only>
+          <ion-icon  style="zoom: 1"  name="trash"></ion-icon></button>
+      </div>
+
+  </div>
+
+</ion-content>
+
+
+
+<ion-footer>
+
+  <ion-buttons right="">
+    <button color="dark" *ngIf="recordingDone == true" ion-button="" icon-only="" (click)="playAudio()"><ion-icon name="play"></ion-icon></button>
+    <button color="dark" *ngIf="recordingDone == true" ion-button="" icon-only="" (click)="uploadNewPost()"><ion-icon name="add"></ion-icon></button>
+    <button color="dark" *ngIf="!recording" ion-button="" icon-only="" (click)="startRecord()"><ion-icon name="mic"></ion-icon></button>
+    <button color="dark" *ngIf="recording" ion-button="" icon-only="" (click)="stopRecord()"><ion-icon name="mic-off"></ion-icon></button>
+  </ion-buttons>
+</ion-footer>

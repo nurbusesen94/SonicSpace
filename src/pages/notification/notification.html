@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Notification</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content ></ion-refresher-content>
+  </ion-refresher>
+  <div>
+    <ion-list *ngFor="let notification of notificationsArray;index as i">
+      <ion-item no-lines text-wrap *ngIf="notification.type=='follow'">
+        <ion-avatar item-left>
+          <div (click)="goToProfile(post.uid)" class="roundProfile" *ngIf="notification.profilePicURL != null"  [style.backgroundImage]="'url('+(notification)?.profilePicURL+')'"></div>
+
+          <!--<img class="roundProfile" src="{{notification.profilePicURL}}">-->
+        </ion-avatar>
+        <p><b>{{(notification)?.username}}</b> started to following you. <ion-note>{{notification.timestamp | date: 'HH:mm'}}</ion-note></p>
+      </ion-item>
+
+      <ion-item no-lines text-wrap *ngIf="notification.type=='like'">
+        <ion-avatar item-left>
+          <div (click)="goToProfile(post.uid)" class="roundProfile" *ngIf="notification.profilePicURL != null"  [style.backgroundImage]="'url('+(notification)?.profilePicURL+')'"></div>
+        </ion-avatar>
+        <ion-row>
+          <ion-col col-10  no-padding no-margin>
+            <p><b>{{(notification)?.username}}</b> liked your post. <ion-note>{{notification.timestamp | date: 'HH:mm'}}</ion-note></p>
+          </ion-col>
+          <ion-col col-2>
+            <!--<img src="http://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png" class="post-small-img" alt="">-->
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+</ion-content>

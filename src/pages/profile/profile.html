@@ -1,0 +1,179 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><b>{{ (profileData | async)?.username }}</b></ion-title>
+    <ion-buttons right>
+      <button color="dark" *ngIf="ownProfile==true" ion-button icon-only (click)="doLogout()"><ion-icon name="ios-power-outline"></ion-icon></button>
+
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content ></ion-refresher-content>
+  </ion-refresher>
+  <ion-row padding>
+    <!-- Avatar -->
+    <ion-col col-3>
+      <div class="roundProfile" alt="" [style.backgroundImage]="'url('+(profileData | async)?.profilePicURL+')'"></div>
+      <!--<img src="{{(profileData | async)?.profilePicURL}}" class="avatar" alt="">-->
+    </ion-col>
+    <!-- Information about user -->
+    <ion-col col-3 text-center >
+      <h6>{{ postCount }}</h6>
+      <p no-padding no-margin>posts</p>
+    </ion-col>
+    <ion-col col-3  text-center>
+      <h6 (click)="followsPage('followers',currentUid)">{{ followersCount }}</h6>
+      <p no-paddin no-margin>followers</p>
+    </ion-col>
+    <ion-col col-3 text-center>
+      <h6 (click)="followsPage('followings',currentUid)">{{followingsCount}}</h6>
+      <p no-paddin no-margin>followings</p>
+    </ion-col>
+  </ion-row>
+
+  <!-- Edit/follow button -->
+  <ion-row no-padding no-margin>
+    <ion-col no-padding no-margin col-4></ion-col>
+    <ion-col no-padding no-margin text-center col-8>
+
+      <button *ngIf="ownProfile==true" class="edit-button" (click)="updateProfile()">Edit your profile</button>
+
+      <button class="follow2" *ngIf="ownProfile == false && searchedUid != undefined" ion-button outline (click)="startChat(searchedUid)">Send Message</button>
+      <button  class="follow2" *ngIf="ownProfile==false && isFollowing==false" ion-button outline (click)="followUser()">Follow</button>
+      <button class="follow2"  *ngIf="ownProfile==false && isFollowing==true" ion-button outline (click)="unfollowUser()">Unfollow</button>
+
+    </ion-col>
+
+    <ion-col col-3></ion-col>
+  </ion-row>
+
+  <!-- Profile info -->
+  <div padding>
+    <p no-margin no-padding><b>{{ (profileData | async)?.firstName }}&nbsp;{{ (profileData | async)?.lastName }}</b></p>
+    <p no-padding no-margin class="info">{{(profileData | async)?.bio}}</p>
+  </div>
+
+  <div>
+    <ion-segment color="renk" [(ngModel)]="profile_segment">
+      <ion-segment-button value="grid">
+        <ion-icon color="primary" name="ios-microphone-outline"></ion-icon>
+      </ion-segment-button>
+
+      <ion-segment-button value="saved">
+        <ion-icon  color="primary" name="md-heart-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <!--postlar segmenti-->
+
+  <div  [ngSwitch]="profile_segment" class="tweetEntry-tweetHolder"  *ngFor="let posts of postList;index as i;">
+
+    <ion-list style="margin: 0px" *ngSwitchCase="'grid'">
+
+      <div class="tweetEntry" *ngFor="let post of posts;">
+
+        <div class="tweetEntry-content">
+
+          <a class="tweetEntry-account-group">
+
+            <div class="roundProfile2" alt="" *ngIf="post.profilePicURL != null" [style.backgroundImage]="'url('+(post)?.profilePicURL+')'"></div>
+
+
+
+            <strong class="tweetEntry-fullname">
+              {{ (post)?.firstname }}&nbsp;{{ (post)?.lastname }}
+            </strong>
+
+            <span class="tweetEntry-username">
+        @<b>{{ (post)?.username }}</b>
+      </span>
+
+            <span class="tweetEntry-timestamp">{{ post.timestamp | date: 'HH:mm'}}</span>
+
+          </a>
+
+          <div class="tweetEntry-text-container">
+            <audio controls src={{post.audioFileURL}}></audio>
+
+          </div>
+
+        </div>
+
+        <div class="tweetEntry-action-list" style="line-height:24px">
+
+          <button  ion-button color="danger" clear (click)="likePost(post)"  icon-only>
+            <ion-icon  style="zoom: 1"  name="ios-heart-outline">  </ion-icon>
+            <p *ngIf="post.likes_count"> {{post.likes_count}}</p>
+          </button>
+
+          <button style="background-color: transparent;" *ngIf="post.uid == ownUid" ion-button color="whites" clear (click)="deletePost(post)"  icon-only>
+            <ion-icon  style="zoom: 1"  name="trash"></ion-icon></button>
+
+        </div>
+
+      </div>
+
+    </ion-list>
+  </div>
+
+  <!--likelar segmenti-->
+
+  <div  [ngSwitch]="profile_segment" class="tweetEntry-tweetHolder"  *ngFor="let likedPosts of likedPostList;index as i;">
+
+    <ion-list style="margin: 0px" *ngSwitchCase="'saved'">
+
+      <div class="tweetEntry">
+
+        <div class="tweetEntry-content">
+
+          <a class="tweetEntry-account-group">
+
+            <div class="roundProfile2" alt="" *ngIf="likedPosts.profilePicURL != null" [style.backgroundImage]="'url('+(likedPosts)?.profilePicURL+')'"></div>
+
+
+
+            <strong class="tweetEntry-fullname">
+              {{ (likedPosts)?.firstname }}&nbsp;{{ (likedPosts)?.lastname }}
+            </strong>
+
+            <span class="tweetEntry-username">
+        @<b>{{ (likedPosts)?.username }}</b>
+      </span>
+
+            <span class="tweetEntry-timestamp">{{ likedPosts.timestamp | date: 'HH:mm'}}</span>
+
+          </a>
+
+          <div class="tweetEntry-text-container">
+            <audio controls src={{likedPosts.audioFileURL}}></audio>
+
+          </div>
+
+        </div>
+
+        <div class="tweetEntry-action-list" style="line-height:24px">
+
+          <button  ion-button color="whites" clear (click)="likePost(likedPosts)"  icon-only>
+            <ion-icon  style="zoom: 1"  name="ios-heart-outline">  </ion-icon>
+            <p *ngIf="likedPosts.likes_count"> {{likedPosts.likes_count}}</p>
+          </button>
+
+          <button style="background-color: transparent;" *ngIf="likedPosts.uid == ownUid" ion-button color="whites" clear (click)="deletePost(likedPosts)"  icon-only>
+            <ion-icon  style="zoom: 1"  name="trash"></ion-icon></button>
+          <!--<i  class="fa fa-reply" style="width: 80px;"></i>-->
+          <!--<i class="fa fa-retweet" style="width: 80px"></i>-->
+          <!--<i class="fa fa-heart" style="width: 80px"></i>-->
+        </div>
+
+      </div>
+
+    </ion-list>
+  </div>
+
+</ion-content>

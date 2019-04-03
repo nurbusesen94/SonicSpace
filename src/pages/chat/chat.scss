@@ -1,0 +1,60 @@
+page-chat {
+
+  .chat_message {
+
+    h2 {
+
+      text-align: left;
+    }
+
+    p {
+      text-align: right;
+    }
+
+    .box1 {
+      width: auto;
+      margin: auto;
+      border: 2px solid #488aff;
+      padding: 20px;
+      background: #488aff;
+      word-wrap: break-word;
+      font-weight: normal;
+      color: #FFFFFF;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+      font-family: arial;
+
+      position: relative;
+    }
+
+  }
+  .box2 {
+    width: auto;
+    margin:  auto;
+    border: 2px solid #f5f5f5;
+    padding: 20px;
+    word-wrap: break-word;
+    background: #f5f5f5;
+    font-weight: normal;
+    color: #000000;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    font-family: arial;
+    position: relative;
+  }
+
+.roundProfile2{
+  float: left;
+  height: 48px;
+  width: 48px;
+  margin-top: -15px;
+  border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+
+
+}
+
+}

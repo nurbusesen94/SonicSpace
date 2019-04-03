@@ -1,0 +1,86 @@
+<div class="baGround"></div>
+<ion-content  padding style="position: static;background: transparent!important;">
+
+  <ion-grid *ngIf="isSignOrReg=='sign'"  style="height: 100%" >
+    <ion-row  justify-content-center align-items-center style="height: 100%">
+      <ion-col>
+        <ion-row>
+
+        </ion-row>
+        <ion-row>
+          <ion-item style=" border-radius:50px 50px 50px 50px; background: transparent;">
+            <ion-label style="margin-left: 2%; color: black;" floating>E-Mail</ion-label>
+            <ion-input  style="background-color: transparent; color: black;" type="email" [(ngModel)]="user.email"></ion-input>
+          </ion-item>
+          <ion-item  style="border-radius:50px 50px 50px 50px;background: transparent;">
+            <ion-label style="margin-left: 2%;color: black;"  floating>Password</ion-label>
+            <ion-input style="background-color: transparent;color: black;" type="password" [(ngModel)]="user.password"></ion-input>
+          </ion-item>
+
+        </ion-row>
+        <ion-row>
+          <div style="width:300px;height:35px;"></div>
+          <button color="whitesmoke"
+                  ion-button round outline block style="border-radius:50px 50px 50px 50px;color: black;"
+
+                  (click)= "personalHomePage(user)">
+            Login
+          </button>
+          <ion-item no-lines style="width: 100%; background: transparent;">
+            <button item-start style="color: black;" ion-button (click)="showForgotPassword()" clear>Forgot Password</button>
+            <button item-end style="color: black; " (click)="goRegister()" ion-button clear>Sign Up</button>
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid  *ngIf="isSignOrReg=='reg'"  style="position: static;" >
+    <ion-row  justify-content-center align-items-center style="height: 100%">
+      <ion-col>
+
+        <ion-row>
+          <ion-item  style=" border-radius:50px 50px 50px 50px; background: transparent;">
+            <ion-label style="margin-left: 2%; color: black;" floating>Username</ion-label>
+            <ion-input style="background-color: transparent; color: black;" type="text" [(ngModel)]="profile.username"></ion-input>
+          </ion-item>
+          <ion-item style=" border-radius:50px 50px 50px 50px; background: transparent;">
+            <ion-label style="margin-left: 2%; color: black;" floating>Firstname</ion-label>
+            <ion-input  style="background-color: transparent;color: black;" type="text" [(ngModel)]="profile.firstName"></ion-input>
+          </ion-item>
+          <ion-item  style="border-radius:50px 50px 50px 50px;background: transparent;">
+            <ion-label style="margin-left: 2%;color: black;"  floating>Lastname</ion-label>
+            <ion-input  style=" background-color: transparent;color: black;"  type="text" [(ngModel)]="profile.lastName"></ion-input>
+          </ion-item>
+          <ion-item  style="border-radius:50px 50px 50px 50px;background: transparent;">
+            <ion-label style="margin-left: 2%;color: black;"  floating>E-Mail</ion-label>
+            <ion-input style="background-color: transparent;color: black;"  type="email" [(ngModel)]="user.email"></ion-input>
+          </ion-item>
+          <ion-item  style="border-radius:50px 50px 50px 50px;background: transparent;">
+            <ion-label style="margin-left: 2%;color: black;"  floating>Password</ion-label>
+            <ion-input style=" background-color: transparent;color: black;"  type="password" [(ngModel)]="user.password"></ion-input>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <div style="width:300px;height:35px;"></div>
+          <button color="whitesmoke"
+                  ion-button block round outline style="border-radius:50px 50px 50px 50px;color: black;"
+                  (click)="signUpUser(user,profile)">
+            Sign Up
+          </button>
+          <ion-item no-lines style="width: 100%; background: transparent;">
+            <button item-start (click)="showForgotPassword()" style="color: black;" ion-button clear>Forgot Password</button>
+            <button item-end style="color: black;"  (click)="goLogin()" color="black" ion-button clear>Login</button>
+
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+</ion-content>
+
+

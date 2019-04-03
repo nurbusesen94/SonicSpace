@@ -1,0 +1,59 @@
+
+<ion-header>
+
+  <ion-navbar hideBackButton="true" >
+    <ion-buttons start left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="updateProfile(profile.firstName,profile.lastName,profile.bio)">
+        <ion-icon name="checkmark" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <!-- Profile picture -->
+<ion-row>
+  <div class="roundProfile" [style.backgroundImage]="'url('+myPhotoURL+')'"></div>
+</ion-row>
+  <ion-row style="margin-top: 5%">
+    <p (click)="takePhoto()" class="change-text" >Take Photo</p>
+    <p (click)="selectPhoto()" class="change-text" >Select Photo</p>
+  </ion-row>
+
+
+  <!-- Form -->
+
+  <ion-item style="margin-top: 5%">
+    <ion-label>
+      <ion-icon name="person" color="gray"></ion-icon>
+    </ion-label>
+    <ion-input type="text" value="{{firstname}}"  [(ngModel)]="profile.firstName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon name="person" color="gray"></ion-icon>
+    </ion-label>
+    <ion-input type="text" value="{{lastname}}"  [(ngModel)]="profile.lastName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <ion-icon name="md-information-circle" color="gray"></ion-icon>
+    </ion-label>
+    <ion-input type="text" value="{{bio}}"  [(ngModel)]="profile.bio"></ion-input>
+  </ion-item>
+
+
+</ion-content>
+
+

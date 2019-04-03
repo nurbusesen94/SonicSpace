@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar >
+    <ion-title *ngIf="title==1">Followings</ion-title>
+    <ion-title *ngIf="title==2">Followers</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="follows" padding>
+  <ion-list *ngFor="let username of userlist; index as i">
+    <ion-item (click)="goToProfile(data[i])">
+      <ion-avatar item-left="">
+        <div class="roundProfile" [style.backgroundImage]="'url('+((avatarlist[i]))+')'"></div>
+      </ion-avatar>
+      {{username}}
+    </ion-item>
+  </ion-list>
+</ion-content>
